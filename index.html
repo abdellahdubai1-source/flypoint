@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>Fly Point | Flights, Hotels, Visas &amp; Holiday Packages</title>
+  <meta name="description" content="Fly Point is a premium travel agency helping you with flights, hotels, visas, airport transfers and unforgettable holiday packages. Personal support, easy planning, trusted service." />
+  <meta name="keywords" content="travel agency, flight booking, visa assistance, holiday packages, hotel reservations, airport transfers, travel insurance, Fly Point" />
+  <meta name="author" content="Fly Point" />
+  <meta name="theme-color" content="#0a1f44" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Fly Point | Your Journey Starts Here" />
+  <meta property="og:description" content="From flights and hotels to visas and unforgettable holiday packages, Fly Point makes every journey simple and stress-free." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Lucide icon library (lightweight SVG icons) -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+
+  <!-- ============================================================
+       1. HEADER / STICKY NAVIGATION
+  ============================================================= -->
+  <header class="site-header" id="top">
+    <nav class="nav container" aria-label="Primary navigation">
+      <!-- Brand / logo -->
+      <a href="#top" class="brand" aria-label="Fly Point home">
+        <span class="brand__icon" aria-hidden="true">
+          <i data-lucide="plane"></i>
+        </span>
+        <span class="brand__name">Fly&nbsp;Point</span>
+      </a>
+
+      <!-- Desktop menu -->
+      <ul class="nav__menu" id="navMenu">
+        <li><a href="#top" class="nav__link">Home</a></li>
+        <li><a href="#services" class="nav__link">Services</a></li>
+        <li><a href="#destinations" class="nav__link">Destinations</a></li>
+        <li><a href="#about" class="nav__link">About</a></li>
+        <li><a href="#contact" class="nav__link">Contact</a></li>
+        <li class="nav__cta-mobile">
+          <a href="https://wa.me/971521968611?text=Hello%20Fly%20Point%2C%20I%20would%20like%20to%20plan%20my%20trip."
+             class="btn btn--gold" target="_blank" rel="noopener">Plan Your Trip</a>
+        </li>
+      </ul>
+
+      <!-- Desktop CTA -->
+      <a href="https://wa.me/971521968611?text=Hello%20Fly%20Point%2C%20I%20would%20like%20to%20plan%20my%20trip."
+         class="btn btn--gold nav__cta" target="_blank" rel="noopener">Plan Your Trip</a>
+
+      <!-- Hamburger (mobile) -->
+      <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============================================================
+         2. HERO SECTION
+    ============================================================= -->
+    <section class="hero" id="hero">
+      <div class="hero__overlay"></div>
+      <div class="hero__inner container">
+        <p class="hero__eyebrow reveal">Explore the World with Fly Point</p>
+        <h1 class="hero__title reveal">Your Journey Starts Here</h1>
+        <p class="hero__desc reveal">
+          From flights and hotels to visas and unforgettable holiday packages,
+          Fly Point makes every journey simple and stress-free.
+        </p>
+
+        <div class="hero__actions reveal">
+          <a href="#destinations" class="btn btn--gold btn--lg">
+            <i data-lucide="compass" aria-hidden="true"></i> Explore Destinations
+          </a>
+          <a href="https://wa.me/971521968611?text=Hello%20Fly%20Point%2C%20I%20would%20like%20to%20plan%20my%20trip."
+             class="btn btn--outline btn--lg" target="_blank" rel="noopener">
+            <i data-lucide="message-circle" aria-hidden="true"></i> Chat on WhatsApp
+          </a>
+        </div>
+
+        <p class="hero__trust reveal">
+          <span>Personal Support</span>
+          <span class="dot" aria-hidden="true">•</span>
+          <span>Easy Planning</span>
+          <span class="dot" aria-hidden="true">•</span>
+          <span>Trusted Service</span>
+        </p>
+      </div>
+
+      <!-- 3. TRIP SEARCH CARD (floating) -->
+      <div class="search-card container" id="searchCard">
+        <form class="search-card__form" id="searchForm" novalidate>
+          <div class="field">
+            <label for="from">From</label>
+            <div class="field__control">
+              <i data-lucide="plane-takeoff" aria-hidden="true"></i>
+              <input type="text" id="from" name="from" placeholder="City or airport" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="to">To</label>
+            <div class="field__control">
+              <i data-lucide="plane-landing" aria-hidden="true"></i>
+              <input type="text" id="to" name="to" placeholder="City or airport" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="depart">Departure Date</label>
+            <div class="field__control">
+              <i data-lucide="calendar" aria-hidden="true"></i>
+              <input type="date" id="depart" name="depart" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="travellers">Travellers</label>
+            <div class="field__control">
+              <i data-lucide="users" aria-hidden="true"></i>
+              <select id="travellers" name="travellers">
+                <option value="1">1 Traveller</option>
+                <option value="2">2 Travellers</option>
+                <option value="3">3 Travellers</option>
+                <option value="4">4 Travellers</option>
+                <option value="5">5+ Travellers</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn--navy search-card__submit">
+            <i data-lucide="search" aria-hidden="true"></i> Search Flights
+          </button>
+        </form>
+
+        <!-- Polished demo message (revealed via JS) -->
+        <div class="search-card__msg" id="searchMsg" role="status" aria-live="polite" hidden>
+          <i data-lucide="sparkles" aria-hidden="true"></i>
+          <div>
+            <strong>This is a demo search.</strong>
+            <span>To get real flight options tailored to you, message our team on WhatsApp.</span>
+          </div>
+          <a href="https://wa.me/971521968611?text=Hello%20Fly%20Point%2C%20I%20would%20like%20to%20plan%20my%20trip."
+             class="btn btn--gold btn--sm" target="_blank" rel="noopener">Chat Now</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. SERVICES SECTION
+    ============================================================= -->
+    <section class="section services" id="services">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="section__eyebrow">Our Services</p>
+          <h2 class="section__title">Everything You Need for Your Journey</h2>
+        </header>
+
+        <div class="services__grid">
+          <!-- Card: Flight Booking -->
+          <article class="service-card reveal">
+            <span class="service-card__icon"><i data-lucide="plane" aria-hidden="true"></i></span>
+            <h3>Flight Booking</h3>
+            <p>We find comfortable, well-priced flights that match your dates, budget and travel style.</p>
+          </article>
+
+          <!-- Card: Visa Assistance -->
+          <article class="service-card reveal">
+            <span class="service-card__icon"><i data-lucide="stamp" aria-hidden="true"></i></span>
+            <h3>Visa Assistance</h3>
+            <p>Clear guidance through visa requirements and paperwork so nothing slows your trip down.</p>
+          </article>
+
+          <!-- Card: Holiday Packages -->
+          <article class="service-card reveal">
+            <span class="service-card__icon"><i data-lucide="palmtree" aria-hidden="true"></i></span>
+            <h3>Holiday Packages</h3>
+            <p>Thoughtfully arranged holidays that bundle flights, stays and experiences into one easy plan.</p>
+          </article>
+
+          <!-- Card: Hotel Reservations -->
+          <article class="service-card reveal">
+            <span class="service-card__icon"><i data-lucide="bed-double" aria-hidden="true"></i></span>
+            <h3>Hotel Reservations</h3>
+            <p>Handpicked hotels for every budget, booked in the right area so you feel at home on arrival.</p>
+          </article>
+
+          <!-- Card: Airport Transfers -->
+          <article class="service-card reveal">
+            <span class="service-card__icon"><i data-lucide="car-front" aria-hidden="true"></i></span>
+            <h3>Airport Transfers</h3>
+            <p>Reliable pick-ups and drop-offs so your journey stays smooth from the moment you land.</p>
+          </article>
+
+          <!-- Card: Travel Insurance -->
+          <article class="service-card reveal">
+            <span class="service-card__icon"><i data-lucide="shield-check" aria-hidden="true"></i></span>
+            <h3>Travel Insurance</h3>
+            <p>Simple, sensible cover options that give you peace of mind wherever your travels take you.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. POPULAR DESTINATIONS
+    ============================================================= -->
+    <section class="section section--tint destinations" id="destinations">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="section__eyebrow">Where To Next</p>
+          <h2 class="section__title">Discover Popular Destinations</h2>
+        </header>
+
+        <div class="destinations__grid">
+          <!-- Dubai -->
+          <article class="dest-card reveal">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80"
+                   alt="Skyline of Dubai at dusk with the Burj Khalifa" loading="lazy" width="800" height="1000" />
+            </div>
+            <div class="dest-card__body">
+              <h3>Dubai</h3>
+              <p>Futuristic skylines, golden deserts and world-class shopping and dining.</p>
+              <a href="https://wa.me/971521968611?text=Hello%20Fly%20Point%2C%20I%20would%20like%20to%20explore%20Dubai."
+                 class="link-arrow" target="_blank" rel="noopener">
+                Explore <i data-lucide="arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Istanbul -->
+          <article class="dest-card reveal">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=800&q=80"
+                   alt="Historic mosque and skyline of Istanbul at sunset" loading="lazy" width="800" height="1000" />
+            </div>
+            <div class="dest-card__body">
+              <h3>Istanbul</h3>
+              <p>Where two continents meet — rich history, grand bazaars and warm hospitality.</p>
+              <a href="https://wa.me/971521968611?text=Hello%20Fly%20Point%2C%20I%20would%20like%20to%20explore%20Istanbul."
+                 class="link-arrow" target="_blank" rel="noopener">
+                Explore <i data-lucide="arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Maldives -->
+          <article class="dest-card reveal">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80"
+                   alt="Overwater villas above turquoise water in the Maldives" loading="lazy" width="800" height="1000" />
+            </div>
+            <div class="dest-card__body">
+              <h3>Maldives</h3>
+              <p>Turquoise lagoons, private overwater villas and pure island serenity.</p>
+              <a href="https://wa.me/971521968611?text=Hello%20Fly%20Point%2C%20I%20would%20like%20to%20explore%20the%20Maldives."
+                 class="link-arrow" target="_blank" rel="noopener">
+                Explore <i data-lucide="arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Paris -->
+          <article class="dest-card reveal">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80"
+                   alt="The Eiffel Tower framed by tree-lined avenues in Paris" loading="lazy" width="800" height="1000" />
+            </div>
+            <div class="dest-card__body">
+              <h3>Paris</h3>
+              <p>Timeless romance, iconic landmarks and unforgettable café culture.</p>
+              <a href="https://wa.me/971521968611?text=Hello%20Fly%20Point%2C%20I%20would%20like%20to%20explore%20Paris."
+                 class="link-arrow" target="_blank" rel="noopener">
+                Explore <i data-lucide="arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         6. FEATURED HOLIDAY EXPERIENCE
+    ============================================================= -->
+    <section class="featured" id="featured" aria-label="Featured holiday experience">
+      <div class="featured__overlay"></div>
+      <div class="featured__inner container reveal">
+        <p class="section__eyebrow section__eyebrow--light">Signature Holidays</p>
+        <h2 class="featured__title">Unforgettable Holidays, Designed for You</h2>
+        <p class="featured__text">
+          Whether you're planning a family vacation, honeymoon or weekend escape,
+          we help create a journey that fits your dreams.
+        </p>
+        <a href="https://wa.me/971521968611?text=Hello%20Fly%20Point%2C%20I%20would%20like%20to%20plan%20my%20holiday."
+           class="btn btn--gold btn--lg" target="_blank" rel="noopener">
+          <i data-lucide="message-circle" aria-hidden="true"></i> Plan My Holiday
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         7. WHY CHOOSE FLY POINT
+    ============================================================= -->
+    <section class="section why" id="about">
+      <div class="container why__grid">
+        <div class="why__media reveal">
+          <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=900&q=80"
+               alt="Two happy travellers looking out over a scenic landscape" loading="lazy" width="900" height="1100" />
+        </div>
+
+        <div class="why__content reveal">
+          <p class="section__eyebrow">Why Choose Fly Point</p>
+          <h2 class="section__title">Travel Planned Around You</h2>
+
+          <ul class="why__list">
+            <li>
+              <span class="why__icon"><i data-lucide="user-round-check" aria-hidden="true"></i></span>
+              <div><h3>Personal Travel Assistance</h3><p>A real person who understands your plans from the first message to your return.</p></div>
+            </li>
+            <li>
+              <span class="why__icon"><i data-lucide="badge-check" aria-hidden="true"></i></span>
+              <div><h3>Carefully Selected Options</h3><p>We compare and curate, so you only choose from options worth your time.</p></div>
+            </li>
+            <li>
+              <span class="why__icon"><i data-lucide="zap" aria-hidden="true"></i></span>
+              <div><h3>Fast and Friendly Support</h3><p>Quick, clear answers whenever you need them — before, during and after your trip.</p></div>
+            </li>
+            <li>
+              <span class="why__icon"><i data-lucide="smile" aria-hidden="true"></i></span>
+              <div><h3>Stress-Free Planning</h3><p>We handle the moving parts so planning feels calm and genuinely enjoyable.</p></div>
+            </li>
+          </ul>
+
+          <p class="why__statement">
+            We take care of the details, so you can focus on enjoying the journey.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         8. HOW IT WORKS
+    ============================================================= -->
+    <section class="section section--tint how" id="how">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="section__eyebrow">Simple Process</p>
+          <h2 class="section__title">How It Works</h2>
+        </header>
+
+        <div class="how__grid">
+          <article class="step-card reveal">
+            <span class="step-card__num">01</span>
+            <h3>Tell Us Your Plan</h3>
+            <p>Share your destination, dates and travel preferences.</p>
+          </article>
+          <article class="step-card reveal">
+            <span class="step-card__num">02</span>
+            <h3>Get the Best Options</h3>
+            <p>Our team prepares suitable travel options for you.</p>
+          </article>
+          <article class="step-card reveal">
+            <span class="step-card__num">03</span>
+            <h3>Confirm and Travel</h3>
+            <p>Choose your preferred option and get ready for your journey.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         9. TESTIMONIALS  (clearly labelled sample placeholders)
+    ============================================================= -->
+    <section class="section testimonials" id="testimonials">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="section__eyebrow">Kind Words</p>
+          <h2 class="section__title">What Travellers Say</h2>
+          <p class="section__note">Sample testimonials shown for this homepage demo — ready to be replaced with your real customer reviews.</p>
+        </header>
+
+        <div class="testimonials__grid">
+          <figure class="quote-card reveal">
+            <i data-lucide="quote" class="quote-card__mark" aria-hidden="true"></i>
+            <blockquote>Planning was completely stress-free — everything was organised for us and we could just enjoy the trip.</blockquote>
+            <figcaption><span class="quote-card__name">Sample Traveller</span><span class="quote-card__meta">Placeholder review</span></figcaption>
+          </figure>
+
+          <figure class="quote-card reveal">
+            <i data-lucide="quote" class="quote-card__mark" aria-hidden="true"></i>
+            <blockquote>Every question was answered quickly and clearly. It felt like having a friend who knows travel inside out.</blockquote>
+            <figcaption><span class="quote-card__name">Sample Traveller</span><span class="quote-card__meta">Placeholder review</span></figcaption>
+          </figure>
+
+          <figure class="quote-card reveal">
+            <i data-lucide="quote" class="quote-card__mark" aria-hidden="true"></i>
+            <blockquote>The options we received were well thought out and matched exactly what we were looking for.</blockquote>
+            <figcaption><span class="quote-card__name">Sample Traveller</span><span class="quote-card__meta">Placeholder review</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         10. FINAL CTA
+    ============================================================= -->
+    <section class="final-cta" id="contact">
+      <div class="container final-cta__inner reveal">
+        <h2>Ready to Start Your Next Journey?</h2>
+        <p>Talk to Fly Point today and let us help you plan a smooth and memorable trip.</p>
+        <div class="final-cta__actions">
+          <a href="https://wa.me/971521968611?text=Hello%20Fly%20Point%2C%20I%20would%20like%20to%20plan%20my%20trip."
+             class="btn btn--gold btn--lg" target="_blank" rel="noopener">
+            <i data-lucide="message-circle" aria-hidden="true"></i> WhatsApp Us
+          </a>
+          <a href="tel:+971521968611" class="btn btn--outline-light btn--lg">
+            <i data-lucide="phone" aria-hidden="true"></i> Call 052 196 8611
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       11. FOOTER
+  ============================================================= -->
+  <footer class="site-footer">
+    <div class="container site-footer__grid">
+      <!-- Brand + description -->
+      <div class="site-footer__brand">
+        <a href="#top" class="brand brand--light" aria-label="Fly Point home">
+          <span class="brand__icon" aria-hidden="true"><i data-lucide="plane"></i></span>
+          <span class="brand__name">Fly&nbsp;Point</span>
+        </a>
+        <p>Your trusted travel partner for flights, hotels, visas and unforgettable holiday packages — thoughtfully planned around you.</p>
+        <div class="site-footer__social" aria-label="Social media">
+          <a href="#" aria-label="Facebook (placeholder)"><i data-lucide="facebook" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Instagram (placeholder)"><i data-lucide="instagram" aria-hidden="true"></i></a>
+          <a href="#" aria-label="LinkedIn (placeholder)"><i data-lucide="linkedin" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <!-- Quick links -->
+      <div class="site-footer__col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#top">Home</a></li>
+          <li><a href="#destinations">Destinations</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div class="site-footer__col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Flight Booking</a></li>
+          <li><a href="#services">Visa Assistance</a></li>
+          <li><a href="#services">Holiday Packages</a></li>
+          <li><a href="#services">Hotel Reservations</a></li>
+          <li><a href="#services">Airport Transfers</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="site-footer__col">
+        <h4>Get in Touch</h4>
+        <ul class="site-footer__contact">
+          <li>
+            <a href="tel:+971521968611"><i data-lucide="phone" aria-hidden="true"></i> 052 196 8611</a>
+          </li>
+          <li>
+            <a href="https://wa.me/971521968611?text=Hello%20Fly%20Point%2C%20I%20would%20like%20to%20plan%20my%20trip."
+               target="_blank" rel="noopener"><i data-lucide="message-circle" aria-hidden="true"></i> Chat on WhatsApp</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__bar">
+      <div class="container">
+        <p>&copy; <span id="year"></span> Fly Point. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp button -->
+  <a href="https://wa.me/971521968611?text=Hello%20Fly%20Point%2C%20I%20would%20like%20to%20plan%20my%20trip."
+     class="fab-whatsapp" target="_blank" rel="noopener" aria-label="Chat with Fly Point on WhatsApp">
+    <i data-lucide="message-circle" aria-hidden="true"></i>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
