@@ -1,130 +1,161 @@
-/* =============================================================
-   FLY POINT — Interactions
-   - Mobile hamburger menu
-   - Sticky header shadow on scroll
-   - Active nav link highlighting (scroll spy)
-   - Reveal-on-scroll animations
-   - Trip search demo message
-   - Auto footer year
-   - Lucide icon rendering
-   ============================================================= */
-(function () {
-  "use strict";
+"use strict";
 
-  /* ---------- Render Lucide icons ---------- */
-  function renderIcons() {
-    if (window.lucide && typeof window.lucide.createIcons === "function") {
-      window.lucide.createIcons();
-    }
-  }
-  // Lucide script is deferred; render once it (and the DOM) are ready.
-  if (document.readyState !== "loading") {
-    renderIcons();
-  } else {
-    document.addEventListener("DOMContentLoaded", renderIcons);
-  }
-  window.addEventListener("load", renderIcons);
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector(".site-header");
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navMenu = document.querySelector(".nav-menu");
+  const navLinks = document.querySelectorAll(".nav-links a");
+  const sections = document.querySelectorAll("main section[id], header[id]");
+  const tripSearch = document.querySelector("#trip-search");
+  const searchModal = document.querySelector("#search-modal");
+  const modalClose = document.querySelector(".modal-close");
+  const modalWhatsApp = document.querySelector("#modal-whatsapp");
+  const currentYear = document.querySelector("#current-year");
 
-  /* ---------- Mobile hamburger menu ---------- */
-  var toggle = document.getElementById("navToggle");
-  var menu = document.getElementById("navMenu");
+  const closeMenu = () => {
+    if (!menuToggle || !navMenu) return;
+    menuToggle.classList.remove("open");
+    navMenu.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation menu");
+    document.body.classList.remove("menu-open");
+  };
 
-  function closeMenu() {
-    if (!menu || !toggle) return;
-    menu.classList.remove("is-open");
-    toggle.classList.remove("is-open");
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.setAttribute("aria-label", "Open menu");
-  }
+  const openMenu = () => {
+    if (!menuToggle || !navMenu) return;
+    menuToggle.classList.add("open");
+    navMenu.classList.add("open");
+    menuToggle.setAttribute("aria-expanded", "true");
+    menuToggle.setAttribute("aria-label", "Close navigation menu");
+    document.body.classList.add("menu-open");
+  };
 
-  if (toggle && menu) {
-    toggle.addEventListener("click", function () {
-      var isOpen = menu.classList.toggle("is-open");
-      toggle.classList.toggle("is-open", isOpen);
-      toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      toggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      isOpen ? closeMenu() : openMenu();
     });
 
-    // Close the menu after clicking any nav link (mobile)
-    menu.addEventListener("click", function (e) {
-      if (e.target.closest("a")) closeMenu();
-    });
+    navLinks.forEach((link) => link.addEventListener("click", closeMenu));
 
-    // Close on Escape
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") closeMenu();
-    });
-
-    // Close when resizing back up to desktop
-    window.addEventListener("resize", function () {
-      if (window.innerWidth > 820) closeMenu();
+    document.addEventListener("click", (event) => {
+      if (
+        navMenu.classList.contains("open") &&
+        !navMenu.contains(event.target) &&
+        !menuToggle.contains(event.target)
+      ) {
+        closeMenu();
+      }
     });
   }
 
-  /* ---------- Sticky header shadow ---------- */
-  var header = document.querySelector(".site-header");
-  function onScrollHeader() {
+  const updateHeader = () => {
     if (!header) return;
-    header.classList.toggle("is-scrolled", window.scrollY > 8);
+    header.classList.toggle("scrolled", window.scrollY > 35);
+  };
+
+  updateHeader();
+  window.addEventListener("scroll", updateHeader, { passive: true });
+
+  const updateActiveNavigation = () => {
+    let currentSection = "home";
+
+    sections.forEach((section) => {
+      const top = section.offsetTop - 150;
+      if (window.scrollY >= top) currentSection = section.id;
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.toggle(
+        "active",
+        link.getAttribute("href") === `#${currentSection}`
+      );
+    });
+  };
+
+  updateActiveNavigation();
+  window.addEventListener("scroll", updateActiveNavigation, { passive: true });
+
+  const openModal = () => {
+    if (!searchModal) return;
+    searchModal.hidden = false;
+    document.body.classList.add("modal-open");
+    modalClose?.focus();
+  };
+
+  const closeModal = () => {
+    if (!searchModal) return;
+    searchModal.hidden = true;
+    document.body.classList.remove("modal-open");
+  };
+
+  if (tripSearch) {
+    tripSearch.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(tripSearch);
+      const from = String(formData.get("from") || "").trim();
+      const to = String(formData.get("to") || "").trim();
+      const departure = String(formData.get("departure") || "").trim();
+      const travellers = String(formData.get("travellers") || "1 Traveller");
+
+      const message = [
+        "Hello Fly Point, I would like to search for a flight.",
+        "",
+        `From: ${from}`,
+        `To: ${to}`,
+        `Departure: ${departure}`,
+        `Travellers: ${travellers}`,
+        "",
+        "Please send me suitable flight options."
+      ].join("\n");
+
+      if (modalWhatsApp) {
+        modalWhatsApp.href = `https://wa.me/971521968611?text=${encodeURIComponent(message)}`;
+      }
+
+      openModal();
+    });
   }
-  onScrollHeader();
-  window.addEventListener("scroll", onScrollHeader, { passive: true });
 
-  /* ---------- Reveal-on-scroll (IntersectionObserver) ---------- */
-  var revealEls = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window && revealEls.length) {
-    var revealObserver = new IntersectionObserver(function (entries, obs) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+  modalClose?.addEventListener("click", closeModal);
 
-    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  searchModal?.addEventListener("click", (event) => {
+    if (event.target === searchModal) closeModal();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    if (searchModal && !searchModal.hidden) closeModal();
+    closeMenu();
+  });
+
+  if (currentYear) currentYear.textContent = new Date().getFullYear();
+
+  const revealElements = document.querySelectorAll(
+    ".service-card, .destination-card, .benefit-list li, .process-grid article, .testimonial-grid article, .about-images, .about-content"
+  );
+
+  revealElements.forEach((element) => element.classList.add("reveal"));
+
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -30px" }
+    );
+
+    revealElements.forEach((element) => revealObserver.observe(element));
   } else {
-    // Fallback: show everything
-    revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+    revealElements.forEach((element) => element.classList.add("visible"));
   }
 
-  /* ---------- Scroll spy: highlight active nav link ---------- */
-  var sections = document.querySelectorAll("main section[id]");
-  var navLinks = document.querySelectorAll(".nav__link");
-
-  function setActiveLink(id) {
-    navLinks.forEach(function (link) {
-      var href = link.getAttribute("href");
-      link.classList.toggle("is-active", href === "#" + id);
-    });
-  }
-
-  if ("IntersectionObserver" in window && sections.length) {
-    var spy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) setActiveLink(entry.target.id);
-      });
-    }, { threshold: 0.5, rootMargin: "-40% 0px -50% 0px" });
-
-    sections.forEach(function (sec) { spy.observe(sec); });
-  }
-
-  /* ---------- Trip search demo interaction ---------- */
-  var searchForm = document.getElementById("searchForm");
-  var searchMsg = document.getElementById("searchMsg");
-
-  if (searchForm && searchMsg) {
-    searchForm.addEventListener("submit", function (e) {
-      e.preventDefault(); // demo only — no real search
-      searchMsg.hidden = false;
-      renderIcons(); // ensure the sparkles icon inside the message renders
-      // Bring the message into view smoothly
-      searchMsg.scrollIntoView({ behavior: "smooth", block: "center" });
-    });
-  }
-
-  /* ---------- Auto-update footer year ---------- */
-  var yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-})();
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 820) closeMenu();
+  });
+});
